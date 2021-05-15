@@ -1,8 +1,8 @@
 import docx
 
 """
-This File opens a MS Word (.docx) file, fetches the text and formats
-it according to unicode utf-8 guidelines.
+This File opens a MS Word (.docx) file, fetches the text for
+further processing.
 """
 
 
@@ -13,7 +13,7 @@ def extractDocx(docxfile):
     # Make explicit unicode version
     unicode_text = []
     for para in document.paragraphs:
-        unicode_text.append(para.text.encode("utf-8"))
+        unicode_text.append(para.text)
 
     # Print out text of document with two newlines under each paragraph
     return "\n".join(unicode_text)

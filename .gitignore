@@ -130,3 +130,6 @@ dmypy.json
 
 # VSCode
 .vscode
+
+#Local Files
+core/.google-cookie

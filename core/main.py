@@ -2,6 +2,7 @@ import re
 import googlesearch
 import sys
 from extractdocx import extractDocx
+from similarity import substringMatching
 
 
 def createQueries(text):
@@ -60,9 +61,5 @@ if __name__ == "__main__":
     queries = [" ".join(word) for word in queries]
     urls = []
     for query in queries:
-        urls.append(searchGoogle(query))
-    file = open(sys.argv[2], "w")
-    for url in urls:
-        file.write(url[0])
-        file.write("\n")
-    file.close()
+        url = searchGoogle(query)
+        print(substringMatching(text, url[0]))
