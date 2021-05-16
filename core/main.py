@@ -1,6 +1,7 @@
 import re
 import googlesearch
 import sys
+import time
 from extractdocx import extractDocx
 from similarity import substringMatching
 
@@ -29,7 +30,7 @@ def createQueries(text):
     return final_query
 
 
-def searchGoogle(query):
+def searchGoogle(query, num_results=3):
     """Uses Google Search to fetch urls relevant to the query.
 
     Parameters
@@ -37,7 +38,9 @@ def searchGoogle(query):
     query: str
         query to be searched.
     """
-    response = googlesearch.search(query, tld="com", lang="en", num=1, stop=1, pause=2)
+    response = googlesearch.search(
+        query, tld="com", lang="en", num=num_results, stop=num_results, pause=0
+    )
     urls = []
     for url in response:
         urls.append(url)
@@ -57,9 +60,23 @@ if __name__ == "__main__":
             print("Usage: python main.py <input-filename>.txt <output-filename>.txt")
             sys.exit()
         text = text.read()
+
+    search_width = 1
+
     queries = createQueries(text)
     queries = [" ".join(word) for word in queries]
-    urls = []
+    result = []
+    t0 = time.time()
     for query in queries:
-        url = searchGoogle(query)
-        print(substringMatching(text, url[0]))
+        start = time.time()
+        urls = searchGoogle(query, search_width)
+
+        result.append(substringMatching(text, urls[0]))
+
+        end = time.time()
+        duration = end - start
+        if duration < 2:
+            time.sleep(2.1 - duration)
+        print(duration)
+    t1 = time.time()
+    print("total time:", t1 - t0)
