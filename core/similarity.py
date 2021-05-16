@@ -3,7 +3,7 @@ import re
 from bs4 import BeautifulSoup
 
 
-def substringMatching(text, url):
+def substringMatching(text, url, array, process=0):
     headers = {
         "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:12.0) Gecko/20100101 Firefox/12.0",
         "Accept-Language": "en-US",
@@ -17,6 +17,7 @@ def substringMatching(text, url):
     text = re.sub(r"\W+", "", text).lower()
 
     if text in website_text:
-        return True
+        array[process] = True
     else:
-        return False
+        array[process] = False
+    return

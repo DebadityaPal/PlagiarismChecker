@@ -1,5 +1,6 @@
 import re
 import googlesearch
+import threading
 import sys
 import time
 from extractdocx import extractDocx
@@ -61,7 +62,7 @@ if __name__ == "__main__":
             sys.exit()
         text = text.read()
 
-    search_width = 1
+    search_width = 3
 
     queries = createQueries(text)
     queries = [" ".join(word) for word in queries]
@@ -70,13 +71,26 @@ if __name__ == "__main__":
     for query in queries:
         start = time.time()
         urls = searchGoogle(query, search_width)
+        match = [False] * len(urls)
+        jobs = []
+        for i in range(len(urls)):
+            thr = threading.Thread(
+                target=substringMatching, args=(text, urls[i], match, i)
+            )
+            jobs.append(thr)
+            thr.start()
 
-        result.append(substringMatching(text, urls[0]))
+        for thr in jobs:
+            thr.join()
+
+        result.append(match)
 
         end = time.time()
         duration = end - start
         if duration < 2:
             time.sleep(2.1 - duration)
         print(duration)
+
     t1 = time.time()
     print("total time:", t1 - t0)
+    print(result)
