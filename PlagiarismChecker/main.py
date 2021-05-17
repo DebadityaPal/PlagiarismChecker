@@ -62,7 +62,7 @@ if __name__ == "__main__":
             sys.exit()
         text = text.read()
 
-    search_width = 3
+    search_width = 2
 
     queries = createQueries(text)
     queries = [" ".join(word) for word in queries]
