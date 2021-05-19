@@ -12,7 +12,7 @@ def wordDetection(image, join=False):
     edge_img = edgeDetection(blurred)
     ret, edge_img = cv2.threshold(edge_img, 50, 255, cv2.THRESH_BINARY)
     preprocessed_image = cv2.morphologyEx(
-        edge_img, cv2.MORPH_CLOSE, np.ones((15, 15), np.uint8)
+        edge_img, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8)
     )
 
     return textDetection(preprocessed_image, image, join)
@@ -79,34 +79,37 @@ def textDetection(img, image, join=False):
 
     index = 0
     boxes = []
-    # Go through all contours in top level
-    while index >= 0:
-        x, y, w, h = cv2.boundingRect(cnt[index])
-        cv2.drawContours(mask, cnt, index, (255, 255, 255), cv2.FILLED)
-        maskROI = mask[y : y + h, x : x + w]
-        # Ratio of white pixels to area of bounding rectangle
-        r = cv2.countNonZero(maskROI) / (w * h)
+    if cnt:
+        # Go through all contours in top level
+        while index >= 0:
+            x, y, w, h = cv2.boundingRect(cnt[index])
+            cv2.drawContours(mask, cnt, index, (255, 255, 255), cv2.FILLED)
+            maskROI = mask[y : y + h, x : x + w]
+            # Ratio of white pixels to area of bounding rectangle
+            r = cv2.countNonZero(maskROI) / (w * h)
 
-        # Limits for text
-        if (
-            r > 0.1
-            and 1600 > w > 10
-            and 1600 > h > 10
-            and h / w < 3
-            and w / h < 10
-            and (60 // h) * w < 1000
-        ):
-            boxes += [[x, y, w, h]]
+            # Limits for text
+            if (
+                r > 0.1
+                and 1600 > w > 10
+                and 1600 > h > 10
+                and h / w < 3
+                and w / h < 10
+                and (60 // h) * w < 1000
+            ):
+                boxes += [[x, y, w, h]]
 
-        index = hierarchy[0][index][0]
+            index = hierarchy[0][index][0]
 
-    # image for drawing bounding boxes
-    small = cv2.cvtColor(small, cv2.COLOR_GRAY2RGB)
-    bounding_boxes = np.array([0, 0, 0, 0])
-    for (x, y, w, h) in boxes:
-        cv2.rectangle(small, (x, y), (x + w, y + h), (0, 255, 0), 2)
-        bounding_boxes = np.vstack((bounding_boxes, np.array([x, y, x + w, y + h])))
-    cv2.imwrite("./boxes.jpg", cv2.cvtColor(small, cv2.COLOR_BGR2RGB))
+        # image for drawing bounding boxes
+        small = cv2.cvtColor(small, cv2.COLOR_GRAY2RGB)
+        bounding_boxes = np.array([0, 0, 0, 0])
+        for (x, y, w, h) in boxes:
+            cv2.rectangle(small, (x, y), (x + w, y + h), (0, 255, 0), 2)
+            bounding_boxes = np.vstack((bounding_boxes, np.array([x, y, x + w, y + h])))
+        cv2.imwrite("./boxes.jpg", cv2.cvtColor(small, cv2.COLOR_BGR2RGB))
 
-    boxes = bounding_boxes.dot(ratio(image, small.shape[0])).astype(np.int64)
-    return boxes[1:]
+        boxes = bounding_boxes.dot(ratio(image, small.shape[0])).astype(np.int64)
+        return boxes[1:]
+    else:
+        return boxes
