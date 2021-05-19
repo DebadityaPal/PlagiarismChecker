@@ -1,12 +1,6 @@
 import cv2
 import numpy as np
-import sys
-
-
-def resize(img, height=800):
-    """Resize image to given height"""
-    ratio = height / img.shape[0]
-    return cv2.resize(img, (int(ratio * img.shape[1]), height))
+from utils import resize
 
 
 def fourCornersSort(pts):
@@ -37,8 +31,8 @@ def contourOffset(cnt, offset):
     return cnt
 
 
-def pageDetection(image_path, output_path):
-    image = cv2.cvtColor(cv2.imread(image_path), cv2.COLOR_BGR2RGB)
+def pageDetection(image):
+
     img = cv2.cvtColor(resize(image), cv2.COLOR_BGR2GRAY)
     img = cv2.bilateralFilter(img, 9, 75, 75)
     img = cv2.adaptiveThreshold(
@@ -111,15 +105,4 @@ def pageDetection(image_path, output_path):
     M = cv2.getPerspectiveTransform(sPoints, tPoints)
     newImage = cv2.warpPerspective(image, M, (int(width), int(height)))
 
-    # Saving the result.
-    cv2.imwrite(output_path, cv2.cvtColor(newImage, cv2.COLOR_BGR2RGB))
-
-    return
-
-
-if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        print("Usage: python page.py <input-filename>.ext <output-filename>.ext")
-        sys.exit()
-
-    pageDetection(sys.argv[1], sys.argv[2])
+    return newImage
