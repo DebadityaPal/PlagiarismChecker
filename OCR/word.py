@@ -3,6 +3,14 @@ import numpy as np
 from utils import resize, ratio
 
 
+def bb_to_img(img, lines):
+    result = []
+    for line in lines:
+        for word in line:
+            result.append(img[word[1] : word[3], word[0] : word[2]])
+    return result
+
+
 def wordDetection(image, join=False):
     """Detecting the words bounding boxes.
     Return: numpy array of bounding boxes [x, y, x+w, y+h]
@@ -12,7 +20,7 @@ def wordDetection(image, join=False):
     edge_img = edgeDetection(blurred)
     ret, edge_img = cv2.threshold(edge_img, 50, 255, cv2.THRESH_BINARY)
     preprocessed_image = cv2.morphologyEx(
-        edge_img, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8)
+        edge_img, cv2.MORPH_CLOSE, np.ones((15, 15), np.uint8)
     )
 
     return textDetection(preprocessed_image, image, join)
