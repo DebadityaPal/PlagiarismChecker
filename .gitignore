@@ -133,3 +133,4 @@ dmypy.json
 
 #Local Files
 core/.google-cookie
+models/
