@@ -75,7 +75,7 @@ def sobelFilter(channel):
     return np.uint8(sobel)
 
 
-def textDetection(img, image, join=False):
+def textDetection(img, image, join=True):
     """Text detection using contours."""
     small = resize(img, 2000)
 
@@ -109,6 +109,10 @@ def textDetection(img, image, join=False):
 
             index = hierarchy[0][index][0]
 
+        if join:
+            # Need more work
+            boxes = group_rectangles(boxes)
+
         # image for drawing bounding boxes
         small = cv2.cvtColor(small, cv2.COLOR_GRAY2RGB)
         bounding_boxes = np.array([0, 0, 0, 0])
@@ -121,3 +125,47 @@ def textDetection(img, image, join=False):
         return boxes[1:]
     else:
         return boxes
+
+
+def union(a, b):
+    x = min(a[0], b[0])
+    y = min(a[1], b[1])
+    w = max(a[0] + a[2], b[0] + b[2]) - x
+    h = max(a[1] + a[3], b[1] + b[3]) - y
+    return [x, y, w, h]
+
+
+def _intersect(a, b, thresh=50):
+    x = max(a[0] - thresh, b[0] - thresh)
+    y = max(a[1] - thresh, b[1] - thresh)
+    w = min(a[0] + a[2], b[0] + b[2]) - x
+    h = min(a[1] + a[3], b[1] + b[3]) - y
+    if w < 0 or h < 0:
+        return False
+    return True
+
+
+def group_rectangles(rec):
+    """
+    Uion intersecting rectangles.
+    Args:
+        rec - list of rectangles in form [x, y, w, h]
+    Return:
+        list of grouped rectangles
+    """
+    tested = [False for i in range(len(rec))]
+    final = []
+    i = 0
+    while i < len(rec):
+        if not tested[i]:
+            j = i + 1
+            while j < len(rec):
+                if not tested[j] and _intersect(rec[i], rec[j]):
+                    rec[i] = union(rec[i], rec[j])
+                    tested[j] = True
+                    j = i
+                j += 1
+            final += [rec[i]]
+        i += 1
+
+    return final
