@@ -1,0 +1,41 @@
+.Form-card {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  min-width: 500px;
+  margin-top: 30px;
+  margin-left: 80px;
+  padding: 10px 10px 10px 20px;
+  color: rgb(7, 40, 133);
+  font-size: 15px;
+}
+
+.btn-primary {
+  background-color: rgb(7, 40, 133);
+  border-color: rgb(7, 40, 133);
+}
+
+.back-button {
+  margin-top: 70px;
+  margin-left: 80px;
+}
+
+form {
+  text-align: left;
+}
+
+.Form-name {
+  align-self: center;
+  font-family: Rougher;
+  font-size: 50px;
+}
+
+.Form-heading {
+  font-size: 20px;
+  font-weight: 600;
+  padding-bottom: 10px;
+}
+
+.Form-choice {
+  display: flex;
+  flex-direction: column;
+}

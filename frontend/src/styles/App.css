@@ -1,0 +1,104 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-image: url("../background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  min-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-home-card {
+  padding-top: 100px;
+  padding-left: 80px;
+  max-width: 730px;
+  align-items: center;
+}
+
+.subheading {
+  text-align: left;
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0.25);
+  padding: 10px 10px 10px 10px;
+  margin-top: 20px;
+  border-radius: 10px;
+  font-family: monospace;
+}
+
+.check-button {
+  padding: 10px 10px 10px 10px;
+  margin: auto;
+  margin-top: 100px;
+  background-color: rgb(7, 40, 133);
+  color: whitesmoke;
+  width: 200px;
+  border-radius: 10px;
+  font-family: monospace;
+}
+
+.check-button:hover {
+  background-color: #007bff;
+  cursor: pointer;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.typewriter h1 {
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: 0.05em solid whitesmoke; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: 0.1em; /* Adjust as needed */
+  animation: typing 2.5s steps(10, end), blink-caret 0.75s step-end infinite;
+  font-size: 150px;
+  font-family: Rougher;
+  color: whitesmoke;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: whitesmoke;
+  }
+}
+
+@font-face {
+  font-family: "Rougher";
+  src: local("Rougher"),
+    url(../fonts/Rougher/RougherPersonalUse-z897X.ttf) format("truetype");
+}
