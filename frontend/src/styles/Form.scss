@@ -1,0 +1,74 @@
+.Form-card {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  min-width: 500px;
+  margin-top: 30px;
+  margin-left: 80px;
+  padding: 10px 10px 10px 20px;
+  color: rgb(7, 40, 133);
+  font-size: 15px;
+
+  form {
+    text-align: left;
+  }
+
+  .Form-name {
+    align-self: center;
+    font-family: Rougher;
+    font-size: 50px;
+  }
+
+  .Form-heading {
+    font-size: 20px;
+    font-weight: 600;
+    padding-bottom: 10px;
+  }
+
+  .Form-choice {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .p-fileupload .p-fileupload-content {
+    margin-bottom: 15px;
+  }
+}
+
+.reveal-if-active {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transform: scale(0.8);
+  transition: 0.5s;
+
+  label {
+    display: block;
+    margin: 0 0 3px 0;
+  }
+
+  textarea {
+    width: 100%;
+    height: 400px;
+    display: block;
+    resize: none;
+  }
+
+  input[type="radio"]:checked ~ & {
+    opacity: 1;
+    max-height: 800px;
+    padding: 0px 20px;
+    transform: scale(1);
+    transition: 0.8s;
+    overflow: visible;
+  }
+}
+
+.btn-primary {
+  background-color: rgb(7, 40, 133);
+  border-color: rgb(7, 40, 133);
+}
+
+.back-button {
+  margin-top: 30px;
+  margin-left: 80px;
+}
