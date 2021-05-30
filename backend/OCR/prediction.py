@@ -2,10 +2,12 @@ import cv2
 import random
 import numpy as np
 from autocorrect import Speller
-from model import Model, DecoderType
+from OCR.model import Model, DecoderType
 from path import Path
 from tensorflow.python.framework import ops
 import logging
+from OCR.page import pageDetection
+from OCR.word import wordDetection, bb_to_img, sort_words
 
 logging.getLogger("tensorflow").disabled = True
 
@@ -112,3 +114,13 @@ def predict(imgs):
         result.append(spell(recognized[0]))
 
     return " ".join(result)
+
+
+def inference(filepath):
+    img = cv2.imread(filepath)
+    img = pageDetection(img)
+    words = wordDetection(img)
+    words = sort_words(words)
+    words = bb_to_img(words)
+    res = predict(img, words)
+    return res

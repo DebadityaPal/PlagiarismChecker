@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from utils import resize
+from OCR.utils import resize
 
 
 def fourCornersSort(pts):

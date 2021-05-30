@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from api.views import PlagCheckViewSet
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
+    path("api/form", PlagCheckViewSet.as_view({"post": "check_plagiarism"})),
 ]

@@ -32,6 +32,10 @@
   .p-fileupload .p-fileupload-content {
     margin-bottom: 15px;
   }
+
+  .p-fileupload-row div {
+    overflow-x: clip;
+  }
 }
 
 .reveal-if-active {

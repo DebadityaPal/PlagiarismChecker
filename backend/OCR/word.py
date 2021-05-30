@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from utils import resize, ratio
+from OCR.utils import resize, ratio
 
 
 def bb_to_img(img, lines):
