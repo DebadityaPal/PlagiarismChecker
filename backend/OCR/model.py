@@ -168,8 +168,8 @@ class Model:
         elif self.decoderType == DecoderType.WordBeamSearch:
             # prepare information about language (dictionary, characters in dataset, characters forming words)
             chars = str().join(self.charList)
-            wordChars = open("../models/wordCharList.txt").read().splitlines()[0]
-            corpus = open("../models/corpus.txt").read()
+            wordChars = open("./models/wordCharList.txt").read().splitlines()[0]
+            corpus = open("./models/corpus.txt").read()
 
             # decode using the "Words" mode of word beam search
             from word_beam_search import WordBeamSearch
@@ -194,7 +194,7 @@ class Model:
         sess = tf.compat.v1.Session()  # TF session
 
         saver = tf.compat.v1.train.Saver(max_to_keep=1)  # saver saves model to file
-        modelDir = "../models/"
+        modelDir = "./models/"
         latestSnapshot = tf.train.latest_checkpoint(modelDir)  # is there a saved model?
 
         # if model must be restored (for inference), there must be a snapshot
@@ -274,7 +274,7 @@ class Model:
 
     def dumpNNOutput(self, rnnOutput):
         "dump the output of the NN to CSV file(s)"
-        dumpDir = "../dump/"
+        dumpDir = "./dump/"
         if not os.path.isdir(dumpDir):
             os.mkdir(dumpDir)
 
@@ -356,4 +356,4 @@ class Model:
     def save(self):
         "save model to file"
         self.snapID += 1
-        self.saver.save(self.sess, "../models/snapshot", global_step=self.snapID)
+        self.saver.save(self.sess, "./models/snapshot", global_step=self.snapID)

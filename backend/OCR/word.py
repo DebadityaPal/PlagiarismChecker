@@ -119,7 +119,6 @@ def textDetection(img, image, join=True):
         for (x, y, w, h) in boxes:
             cv2.rectangle(small, (x, y), (x + w, y + h), (0, 255, 0), 2)
             bounding_boxes = np.vstack((bounding_boxes, np.array([x, y, x + w, y + h])))
-        cv2.imwrite("./boxes.jpg", cv2.cvtColor(small, cv2.COLOR_BGR2RGB))
 
         boxes = bounding_boxes.dot(ratio(image, small.shape[0])).astype(np.int64)
         return boxes[1:]

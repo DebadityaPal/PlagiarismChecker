@@ -89,8 +89,8 @@ def preprocess(img, imgSize, dataAugmentation=False):
 
 class FilePaths:
     "filenames and paths to data"
-    fnCharList = "../models/charList.txt"
-    fnSummary = "../models/summary.json"
+    fnCharList = "./models/charList.txt"
+    fnSummary = "./models/summary.json"
 
 
 class Batch:
@@ -121,6 +121,6 @@ def inference(filepath):
     img = pageDetection(img)
     words = wordDetection(img)
     words = sort_words(words)
-    words = bb_to_img(words)
-    res = predict(img, words)
+    words = bb_to_img(img, words)
+    res = predict(words)
     return res

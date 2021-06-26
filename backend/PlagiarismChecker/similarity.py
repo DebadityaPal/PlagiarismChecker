@@ -80,6 +80,7 @@ def cosineSim(text, url, array, process=0):
         # x = [ele for ele in x if ele != ""]
         vector2 = text_to_vector(sentence)
         cosine = get_cosine(vector1, vector2)
+        print(cosine)
         if cosine > threshold:
             array[process] = True
             break

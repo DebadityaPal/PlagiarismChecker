@@ -2,6 +2,7 @@
   background-color: whitesmoke;
   border-radius: 10px;
   min-width: 500px;
+  max-width: 600px;
   margin-top: 30px;
   margin-left: 80px;
   padding: 10px 10px 10px 20px;
@@ -75,4 +76,21 @@
 .back-button {
   margin-top: 30px;
   margin-left: 80px;
+}
+
+ol {
+  font-weight: 600;
+
+  .PlagCard {
+    max-width: 600px;
+    text-align: left;
+
+    .PlagUrl {
+      color: rgb(7, 40, 133);
+    }
+
+    .PlagContent {
+      font-weight: 400;
+    }
+  }
 }

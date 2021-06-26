@@ -13,30 +13,16 @@ class Form extends React.Component {
     super(props);
     this.state = {
       phase: "form",
-      radio: "text"
+      radio: "text",
+      result: ""
     };
     this.handleRadioChange = this.handleRadioChange.bind(this);
-    this.handleFileUpload = this.handleFileUpload.bind(this);
     this.handleTextarea = this.handleTextarea.bind(this);
     this.handleTextSubmit = this.handleTextSubmit.bind(this);
   }
 
   handleRadioChange(event) {
     this.setState({radio: event.target.value});
-  }
-
-  handleFileUpload(event) {
-    console.log("file uploaded")
-    this.setState({ selectedFile: event.target.files[0], phase: "loading"}, () => {
-      if(this.state.radio !== "ocr" || this.state.radio !== "doc") {
-        this.toast.show({severity:'error', summary: 'Wrong option Selected', detail:'Select another option if you want to submit files', life: 3000});
-      } else {
-        event.preventDefault();
-        let form_data = new FormData();
-        form_data.append("file", this.state.selectedFile, this.state.selectedFile.name);
-        form_data.append("mode", this.state.radio);
-      }
-    });
   }
 
   handleTextarea(event) {
@@ -52,6 +38,12 @@ class Form extends React.Component {
         let form_data = new FormData();
         form_data.append("text", this.state.text);
         form_data.append("mode", this.state.radio);
+        fetch("http://127.0.0.1:8000/api/form", {
+          method: "POST",
+          body: form_data
+        })
+          .then(data => data.json())
+          .then(data => this.setState({result: data, phase: "result"}))
       }
     });
   }
@@ -85,7 +77,23 @@ class Form extends React.Component {
                         name="file-upload"
                         accept='.txt'
                         maxFileSize={10000000}
-                        onUpload={e => this.handleFileUpload(e)}
+                        url={"http://127.0.0.1:8000/api/form"}
+                        onSelect={(e) => {
+                          this.setState({selectedFile: e.files[0]});
+                        }}
+                        onBeforeSend={(e)=> {
+                          e.formData.append("mode", this.state.radio);
+                          e.formData.append("file", this.state.selectedFile, this.state.selectedFile.name)
+                          this.setState({phase: "loading"})
+                        }}
+                        onUpload={(e) => {
+                          if(e.xhr.status === 200) {
+                            let data = JSON.parse(e.xhr.response);
+                            this.setState({result: data, phase: "result"})
+                          } else {
+                            this.toast.show({severity: "error", summary: "Unknown Error", detail:"An unknons exception has occured. Try Again.", life: 3000})
+                          }
+                        }}
                       /> 
                     </div>
                   </div>
@@ -116,6 +124,30 @@ class Form extends React.Component {
             <div className="Form-card">
               <div className="Form-name">PLAGAWARE</div>
               <ProgressSpinner style={{width: '70px', height: '70px', margin:'20px'}} strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"/>
+            </div>
+          </header>
+        </div>
+      );
+    } else if (this.state.phase === "result") {
+      const result = this.state.result;
+      let res = result.map(el => 
+        <li>
+          <div className="PlagCard">
+            <a href={el["match"]} className="PlagUrl">{el["match"]}</a>
+            <div className="PlagContent">{el["sentence"]}</div>
+          </div>
+        </li>
+      )
+      return (
+        <div className="App">
+          <header className="App-header">
+            <Toast ref={(el) => this.toast = el} />
+            <button type="button" class="btn btn-primary back-button" onClick={(e) => this.props.history.push("/")}>Back to Home Page</button>
+            <div className="Form-card">
+              <div className="Form-name">PLAGAWARE</div>
+              <ol>
+                {res}
+              </ol>
             </div>
           </header>
         </div>

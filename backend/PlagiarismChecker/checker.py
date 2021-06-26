@@ -61,7 +61,6 @@ def PlagCheck(text, n_grams=False):
     queries = [" ".join(word) for word in queries]
     result = []
     for query in queries:
-        flag = False
         start = time.time()
         urls = searchGoogle(query, search_width)
         match = [False] * len(urls)
@@ -83,11 +82,8 @@ def PlagCheck(text, n_grams=False):
         for idx in range(len(urls)):
             if match[idx]:
                 temp_dict = {"sentence": query, "match": urls[idx]}
-                flag = True
-                break
 
-        if not flag:
-            temp_dict = {"sentence": query, "match": ""}
+                break
 
         result.append(temp_dict)
 
@@ -96,4 +92,16 @@ def PlagCheck(text, n_grams=False):
         if duration < 2:
             time.sleep(2.1 - duration)
 
-    return result
+    final_result = []
+
+    for i in range(len(result)):
+        if i == 0:
+            final_result.append(result[i])
+        elif result[i]["match"] == result[i - 1]["match"]:
+            final_result[-1]["sentence"] = (
+                final_result[-1]["sentence"] + result[i]["sentence"]
+            )
+        else:
+            final_result.append(result[i])
+
+    return final_result

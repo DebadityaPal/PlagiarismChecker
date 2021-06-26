@@ -48,7 +48,6 @@ def pageDetection(image):
 
     # Finding contour of biggest rectangle
     # Otherwise return corners of original image
-    # Don't forget on our 5px border!
     height = edges.shape[0]
     width = edges.shape[1]
     MAX_COUNTOUR_AREA = (width - 10) * (height - 10)
