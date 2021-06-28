@@ -69,10 +69,12 @@ def PlagCheck(text, n_grams=False):
         for i in range(len(urls)):
             if not n_grams:
                 thr = threading.Thread(
-                    target=substringMatching, args=(text, urls[i], match, i)
+                    target=substringMatching, args=(query, urls[i], match, i)
                 )
             else:
-                thr = threading.Thread(target=cosineSim, args=(text, urls[i], match, i))
+                thr = threading.Thread(
+                    target=cosineSim, args=(query, urls[i], match, i)
+                )
             jobs.append(thr)
             thr.start()
 
