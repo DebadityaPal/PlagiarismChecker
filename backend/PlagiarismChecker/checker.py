@@ -81,13 +81,14 @@ def PlagCheck(text, n_grams=False):
         for thr in jobs:
             thr.join()
 
+        temp_dict = None
         for idx in range(len(urls)):
             if match[idx]:
                 temp_dict = {"sentence": query, "match": urls[idx]}
 
                 break
-
-        result.append(temp_dict)
+        if temp_dict:
+            result.append(temp_dict)
 
         end = time.time()
         duration = end - start

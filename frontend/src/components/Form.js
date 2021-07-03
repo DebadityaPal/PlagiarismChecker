@@ -105,7 +105,23 @@ class Form extends React.Component {
                         name="file-upload"
                         accept='.jpeg, .jpg, .png'
                         maxFileSize={10000000}
-                        onUpload={e => this.handleFileUpload(e)}
+                        url={"http://127.0.0.1:8000/api/form"}
+                        onSelect={(e) => {
+                            this.setState({selectedFile: e.files[0]});
+                        }}
+                        onBeforeSend={(e)=> {
+                            e.formData.append("mode", this.state.radio);
+                            e.formData.append("file", this.state.selectedFile, this.state.selectedFile.name)
+                            this.setState({phase: "loading"})
+                        }}
+                        onUpload={(e) => {
+                            if(e.xhr.status === 200) {
+                              let data = JSON.parse(e.xhr.response);
+                              this.setState({result: data, phase: "result"})
+                            } else {
+                              this.toast.show({severity: "error", summary: "Unknown Error", detail:"An unknons exception has occured. Try Again.", life: 3000})
+                            }
+                        }}
                       /> 
                     </div>
                   </div>

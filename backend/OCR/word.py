@@ -29,7 +29,6 @@ def wordDetection(image, join=False):
 def sort_words(boxes):
     """Sort boxes - (x, y, x+w, y+h) from left to right, top to bottom."""
     mean_height = sum([y2 - y1 for _, y1, _, y2 in boxes]) / len(boxes)
-
     boxes.view("i8,i8,i8,i8").sort(order=["f1"], axis=0)
     current_line = boxes[0][1]
     lines = []
@@ -41,6 +40,7 @@ def sort_words(boxes):
             current_line = box[1]
             continue
         tmp_line.append(box)
+        current_line = (current_line * (len(tmp_line) - 1) + box[1]) / len(tmp_line)
     lines.append(tmp_line)
 
     for line in lines:

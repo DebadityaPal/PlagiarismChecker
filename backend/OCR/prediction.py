@@ -3,7 +3,6 @@ import random
 import numpy as np
 from autocorrect import Speller
 from OCR.model import Model, DecoderType
-from path import Path
 from tensorflow.python.framework import ops
 import logging
 from OCR.page import pageDetection
@@ -101,6 +100,26 @@ class Batch:
         self.gtTexts = gtTexts
 
 
+def increase_brightness(img, value=30):
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    h, s, v = cv2.split(hsv)
+    lim = 255 - value
+    v[v > lim] = 255
+    v[v <= lim] += value
+    final_hsv = cv2.merge((h, s, v))
+    img = cv2.cvtColor(final_hsv, cv2.COLOR_HSV2BGR)
+    return img
+
+
+def final_image(rotated):
+    # Create our shapening kernel, it must equal to one eventually
+    kernel_sharpening = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]])
+    # applying the sharpening kernel to the input image & displaying it.
+    sharpened = cv2.filter2D(rotated, -1, kernel_sharpening)
+    sharpened = increase_brightness(sharpened, 30)
+    return sharpened
+
+
 def predict(imgs):
     ops.reset_default_graph()
     decoderType = DecoderType.BeamSearch
@@ -108,6 +127,7 @@ def predict(imgs):
     spell = Speller(lang="en")
     result = []
     for img in imgs:
+        img = final_image(img)
         img = preprocess(cv2.cvtColor(img, cv2.COLOR_RGB2GRAY), Model.imgSize)
         batch = Batch(None, [img])
         (recognized, probability) = model.inferBatch(batch, True)
@@ -118,6 +138,16 @@ def predict(imgs):
 
 def inference(filepath):
     img = cv2.imread(filepath)
+    img = pageDetection(img)
+    words = wordDetection(img)
+    words = sort_words(words)
+    words = bb_to_img(img, words)
+    res = predict(words)
+    return res
+
+
+def inference_web(imgfile):
+    img = cv2.imdecode(np.fromstring(imgfile.read(), np.uint8), cv2.IMREAD_UNCHANGED)
     img = pageDetection(img)
     words = wordDetection(img)
     words = sort_words(words)
