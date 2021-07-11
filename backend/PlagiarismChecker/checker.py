@@ -2,7 +2,7 @@ import re
 import googlesearch
 import threading
 import time
-from PlagiarismChecker.similarity import cosineSim, substringMatching
+from PlagiarismChecker.similarity import bagOfWordsSim, substringMatching
 
 
 def createQueries(text, n_grams=False):
@@ -73,7 +73,7 @@ def PlagCheck(text, n_grams=False):
                 )
             else:
                 thr = threading.Thread(
-                    target=cosineSim, args=(query, urls[i], match, i)
+                    target=bagOfWordsSim, args=(query, urls[i], match, i)
                 )
             jobs.append(thr)
             thr.start()
