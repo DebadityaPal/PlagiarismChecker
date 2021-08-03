@@ -54,7 +54,7 @@ class Form extends React.Component {
         <div className="App">
           <header className="App-header">
             <Toast ref={(el) => this.toast = el} />
-            <button type="button" class="btn btn-primary back-button" onClick={(e) => this.props.history.push("/")}>Back to Home Page</button>
+            <button type="button" className="btn btn-primary back-button" onClick={(e) => this.props.history.push("/")}>Back to Home Page</button>
             <div className="Form-card">
               <div className="Form-name">PLAGAWARE</div>
               <form onSubmit={this.handleSubmit}>
@@ -62,16 +62,16 @@ class Form extends React.Component {
                 <div className="Form-choice">
                   <div>
                     <input type="radio" name="choice" id="choice-text" value="text" onChange={e => this.handleRadioChange(e)} required />
-                    <label for="choice-text" style={{paddingLeft:"10px"}}>Text</label>
-                    <div class="reveal-if-active">
-                      <label for="input-text">Enter the text for Plagiarism Checking</label>
-                      <textarea type="textarea" id="input-text" name="input-text" class="require-if-active" data-require-pair="#choice-text" onChange={e => this.handleTextarea(e)}></textarea>
-                      <button type="button" class="btn btn-primary" style={{margin:"10px 0 10px 0", backgroundColor:"#4CAF50"}}onClick={e => this.handleTextSubmit(e)}>Submit</button>
+                    <label htmlFor="choice-text" style={{paddingLeft:"10px"}}>Text</label>
+                    <div className="reveal-if-active">
+                      <label htmlFor="input-text">Enter the text for Plagiarism Checking</label>
+                      <textarea type="textarea" id="input-text" name="input-text" className="require-if-active" data-require-pair="#choice-text" onChange={e => this.handleTextarea(e)}></textarea>
+                      <button type="button" className="btn btn-primary" style={{margin:"10px 0 10px 0", backgroundColor:"#4CAF50"}}onClick={e => this.handleTextSubmit(e)}>Submit</button>
                     </div>
                   </div>
                   <div>
                     <input type="radio" name="choice" id="choice-file" value="doc" onChange={e => this.handleRadioChange(e)} required />
-                    <label for="choice-file" style={{paddingLeft:"10px"}}>Upload Text or Docx File</label>
+                    <label htmlFor="choice-file" style={{paddingLeft:"10px"}}>Upload Text or Docx File</label>
                     <div className="reveal-if-active">
                       <FileUpload 
                         name="file-upload"
@@ -99,7 +99,7 @@ class Form extends React.Component {
                   </div>
                   <div>  
                     <input type="radio" name="choice" id="choice-ocr" value = "ocr" onChange={e => this.handleRadioChange(e)} required />
-                    <label for="choice-ocr" style={{paddingLeft:"10px"}}>Upload Image (OCR)</label>
+                    <label htmlFor="choice-ocr" style={{paddingLeft:"10px"}}>Upload Image (OCR)</label>
                     <div className="reveal-if-active">
                       <FileUpload 
                         name="file-upload"
@@ -136,7 +136,7 @@ class Form extends React.Component {
         <div className="App">
           <header className="App-header">
             <Toast ref={(el) => this.toast = el} />
-            <button type="button" class="btn btn-primary back-button" onClick={(e) => this.props.history.push("/")}>Back to Home Page</button>
+            <button type="button" className="btn btn-primary back-button" onClick={(e) => this.props.history.push("/")}>Back to Home Page</button>
             <div className="Form-card">
               <div className="Form-name">PLAGAWARE</div>
               <ProgressSpinner style={{width: '70px', height: '70px', margin:'20px'}} strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"/>
@@ -147,18 +147,16 @@ class Form extends React.Component {
     } else if (this.state.phase === "result") {
       const result = this.state.result;
       let res = result.map(el => 
-        <li>
-          <div className="PlagCard">
-            <a href={el["match"]} className="PlagUrl">{el["match"]}</a>
+        <div className="PlagCard">
+            <div className="PlagUrl"><a href={el["match"]}>{el["match"]}</a></div>
             <div className="PlagContent">{el["sentence"]}</div>
-          </div>
-        </li>
+        </div>
       )
       return (
         <div className="App">
           <header className="App-header">
             <Toast ref={(el) => this.toast = el} />
-            <button type="button" class="btn btn-primary back-button" onClick={(e) => this.props.history.push("/")}>Back to Home Page</button>
+            <button type="button" className="btn btn-primary back-button" onClick={(e) => this.props.history.push("/")}>Back to Home Page</button>
             <div className="Form-card">
               <div className="Form-name">PLAGAWARE</div>
               <ol>

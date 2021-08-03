@@ -2,9 +2,10 @@
   background-color: whitesmoke;
   border-radius: 10px;
   min-width: 500px;
-  max-width: 600px;
+  width: 650px;
   margin-top: 30px;
   margin-left: 80px;
+  margin-bottom: 50px;
   padding: 10px 10px 10px 20px;
   color: rgb(7, 40, 133);
   font-size: 15px;
@@ -16,7 +17,7 @@
   .Form-name {
     align-self: center;
     font-family: Rougher;
-    font-size: 50px;
+    font-size: 80px;
   }
 
   .Form-heading {
@@ -80,17 +81,31 @@
 
 ol {
   font-weight: 600;
+  padding: initial;
 
   .PlagCard {
-    max-width: 600px;
+    max-width: 650px;
     text-align: left;
+    margin: 10px 5px 10px 5px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px 0px rgb(0 0 0 / 25%);
 
     .PlagUrl {
-      color: rgb(7, 40, 133);
+      color: #072885;
+      padding: 10px;
+      background-color: #4caf50;
+      border-radius: 10px 10px 0px 0px;
+      text-align: center;
+
+      a {
+        color: white;
+        font-size: 18px;
+      }
     }
 
     .PlagContent {
       font-weight: 400;
+      padding: 10px;
     }
   }
 }
