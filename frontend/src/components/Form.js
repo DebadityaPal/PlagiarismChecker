@@ -56,7 +56,7 @@ class Form extends React.Component {
             <Toast ref={(el) => this.toast = el} />
             <button type="button" className="btn btn-primary back-button" onClick={(e) => this.props.history.push("/")}>Back to Home Page</button>
             <div className="Form-card">
-              <div className="Form-name">PLAGAWARE</div>
+              <div className="Form-name">PLAGIO</div>
               <form onSubmit={this.handleSubmit}>
                 <div className="Form-heading">Choose your input</div>
                 <div className="Form-choice">
@@ -138,7 +138,7 @@ class Form extends React.Component {
             <Toast ref={(el) => this.toast = el} />
             <button type="button" className="btn btn-primary back-button" onClick={(e) => this.props.history.push("/")}>Back to Home Page</button>
             <div className="Form-card">
-              <div className="Form-name">PLAGAWARE</div>
+              <div className="Form-name">PLAGIO</div>
               <ProgressSpinner style={{width: '70px', height: '70px', margin:'20px'}} strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"/>
             </div>
           </header>
@@ -158,7 +158,7 @@ class Form extends React.Component {
             <Toast ref={(el) => this.toast = el} />
             <button type="button" className="btn btn-primary back-button" onClick={(e) => this.props.history.push("/")}>Back to Home Page</button>
             <div className="Form-card">
-              <div className="Form-name">PLAGAWARE</div>
+              <div className="Form-name">PLAGIO</div>
               <ol>
                 {res}
               </ol>
