@@ -1,40 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Poppins:wght@300&display=swap');
 .Form-card {
-  background-color: whitesmoke;
+  background-color: rgba(174, 174, 255, 0.63);
   border-radius: 10px;
   min-width: 500px;
-  width: 650px;
+  width: 85%;
   margin-top: 30px;
-  margin-left: 80px;
+  margin-left: 50px;
   margin-bottom: 50px;
   padding: 10px 10px 10px 20px;
   color: rgb(7, 40, 133);
   font-size: 15px;
-
   form {
     text-align: left;
   }
-
+  input[type="radio"] {
+    cursor: pointer;
+  }
+  label {
+    font-size: 1.2em;
+  }
   .Form-name {
     align-self: center;
-    font-family: Rougher;
+    font-family: Alata;
     font-size: 80px;
   }
-
   .Form-heading {
     font-size: 20px;
     font-weight: 600;
     padding-bottom: 10px;
   }
-
   .Form-choice {
     display: flex;
     flex-direction: column;
   }
-
   .p-fileupload .p-fileupload-content {
     margin-bottom: 15px;
   }
-
   .p-fileupload-row div {
     overflow-x: clip;
   }
@@ -46,26 +47,36 @@
   overflow: hidden;
   transform: scale(0.8);
   transition: 0.5s;
-
   label {
     display: block;
     margin: 0 0 3px 0;
   }
-
   textarea {
     width: 100%;
-    height: 400px;
+    height: 300px;
     display: block;
     resize: none;
+    border-radius: 5px;
+    font-family: 'Poppins';
+    outline: none;
   }
-
-  input[type="radio"]:checked ~ & {
+  input[type="radio"] {
+    cursor: pointer;
+  }
+  input[type="radio"]:checked~& {
     opacity: 1;
     max-height: 800px;
     padding: 0px 20px;
     transform: scale(1);
     transition: 0.8s;
     overflow: visible;
+  }
+  .submit_text {
+    color: white;
+    padding: 10px 15px;
+    font-size: 1em;
+    border: none !important;
+    border-radius: 5px;
   }
 }
 
@@ -76,33 +87,33 @@
 
 .back-button {
   margin-top: 30px;
-  margin-left: 80px;
+  margin-left: 50px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 ol {
   font-weight: 600;
   padding: initial;
-
   .PlagCard {
-    max-width: 650px;
-    text-align: left;
+    max-width: 100%;
+    text-align: center;
+    align-items: center;
     margin: 10px 5px 10px 5px;
     border-radius: 10px;
-    box-shadow: 5px 5px 5px 0px rgb(0 0 0 / 25%);
-
+    box-shadow: 0px 0px 10px 0px rgba(0, 134, 168, 0.753);
     .PlagUrl {
       color: #072885;
       padding: 10px;
-      background-color: #4caf50;
+      background-color: #01728f;
       border-radius: 10px 10px 0px 0px;
       text-align: center;
-
       a {
         color: white;
         font-size: 18px;
       }
     }
-
     .PlagContent {
       font-weight: 400;
       padding: 10px;
