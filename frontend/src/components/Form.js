@@ -7,6 +7,7 @@ import 'primereact/resources/themes/saga-green/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import React from 'react';
+import LeftArrow from '../assets/arrow-left.png';
 
 class Form extends React.Component {
   constructor(props) {
@@ -54,7 +55,7 @@ class Form extends React.Component {
         <div className="App">
           <header className="App-header">
             <Toast ref={(el) => this.toast = el} />
-            <button type="button" className="btn btn-primary back-button" onClick={(e) => this.props.history.push("/")}>Back to Home Page</button>
+            <button type="button" className="btn back-button" onClick={(e) => this.props.history.push("/")}> <img src={LeftArrow} alt="Back" /> </button>
             <div className="Form-card">
               <div className="Form-name">PLAGIO</div>
               <form onSubmit={this.handleSubmit}>
@@ -66,7 +67,7 @@ class Form extends React.Component {
                     <div className="reveal-if-active">
                       <label htmlFor="input-text">Enter the text for Plagiarism Checking</label>
                       <textarea type="textarea" id="input-text" name="input-text" className="require-if-active" data-require-pair="#choice-text" onChange={e => this.handleTextarea(e)}></textarea>
-                      <button type="button" className="btn btn-primary" style={{margin:"10px 0 10px 0", backgroundColor:"#4CAF50"}}onClick={e => this.handleTextSubmit(e)}>Submit</button>
+                      <button type="button" className="btn btn-primary submit_text" style={{margin:"10px 0 10px 0", backgroundColor:"#4CAF50"}}onClick={e => this.handleTextSubmit(e)}>Submit</button>
                     </div>
                   </div>
                   <div>
@@ -136,7 +137,7 @@ class Form extends React.Component {
         <div className="App">
           <header className="App-header">
             <Toast ref={(el) => this.toast = el} />
-            <button type="button" className="btn btn-primary back-button" onClick={(e) => this.props.history.push("/")}>Back to Home Page</button>
+            <button type="button" className="btn btn-primary back-button" onClick={(e) => this.props.history.push("/")}> <img src={LeftArrow} alt="" /></button>
             <div className="Form-card">
               <div className="Form-name">PLAGIO</div>
               <ProgressSpinner style={{width: '70px', height: '70px', margin:'20px'}} strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"/>
@@ -156,7 +157,7 @@ class Form extends React.Component {
         <div className="App">
           <header className="App-header">
             <Toast ref={(el) => this.toast = el} />
-            <button type="button" className="btn btn-primary back-button" onClick={(e) => this.props.history.push("/")}>Back to Home Page</button>
+            <button type="button" className="btn btn-primary back-button" onClick={(e) => this.props.history.push("/")}> <img src={LeftArrow} alt="" /></button>
             <div className="Form-card">
               <div className="Form-name">PLAGIO</div>
               <ol>

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Poppins:wght@300&display=swap');
 .App {
   text-align: center;
 }
@@ -14,13 +15,13 @@
 }
 
 .App-header {
-  background-image: url("../background.jpg");
+  /* background-image: url("../background.jpg"); */
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;
   min-width: 1000px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
   font-size: calc(10px + 2vmin);
@@ -29,35 +30,58 @@
 
 .App-home-card {
   padding-top: 100px;
-  padding-left: 80px;
-  max-width: 730px;
+  padding: 80px;
+  max-width: 50%;
+  height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  background-color: rgba(85, 85, 252, 0.836)
 }
 
 .subheading {
   text-align: left;
   font-size: 20px;
-  background-color: rgba(0, 0, 0, 0.25);
+  /* background-color: rgba(0, 0, 0, 0.25); */
   padding: 10px 10px 10px 10px;
   margin-top: 20px;
   border-radius: 10px;
   font-family: monospace;
+  font-family: 'Poppins';
+  text-align: center;
 }
 
 .check-button {
   padding: 10px 10px 10px 10px;
   margin: auto;
   margin-top: 100px;
-  background-color: rgb(7, 40, 133);
-  color: whitesmoke;
+  background-color: rgb(255, 255, 255);
+  color: blue;
   width: 200px;
   border-radius: 10px;
-  font-family: monospace;
+  font-family: Poppins;
+  transition: 0.2s;
+  box-shadow: 0px 0px 15px 1px rgba(1, 55, 204, 0.5);
 }
 
 .check-button:hover {
-  background-color: #007bff;
+  font-weight: bold;
   cursor: pointer;
+  transform: scale(1.02);
+}
+
+.home_image_container {
+  width: 50%;
+  height: 100vh;
+  border: 1px solid red;
+}
+
+.home_image_container img {
+  width: 100%;
+  height: auto;
+  margin-top: 5rem;
 }
 
 .App-link {
@@ -65,18 +89,36 @@
 }
 
 .typewriter h1 {
-  overflow: hidden; /* Ensures the content is not revealed until the animation */
-  border-right: 0.05em solid whitesmoke; /* The typwriter cursor */
-  white-space: nowrap; /* Keeps the content on a single line */
-  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-  letter-spacing: 0.1em; /* Adjust as needed */
+  overflow: hidden;
+  /* Ensures the content is not revealed until the animation */
+  border-right: 0.05em solid whitesmoke;
+  /* The typwriter cursor */
+  white-space: nowrap;
+  /* Keeps the content on a single line */
+  margin: 0 auto;
+  /* Gives that scrolling effect as the typing happens */
+  letter-spacing: 0.1em;
+  /* Adjust as needed */
   animation: typing 2.5s steps(10, end), blink-caret 0.75s step-end infinite;
-  font-size: 150px;
-  font-family: Rougher;
+  font-size: 100px;
+  font-family: Alata;
   color: whitesmoke;
 }
 
+.made_by_container {
+  margin-top: 3rem;
+  font-size: 1.2rem;
+  color: white;
+}
+
+.made_by_container a {
+  text-decoration: none;
+  color: white;
+}
+
+
 /* The typing effect */
+
 @keyframes typing {
   from {
     width: 0;
@@ -86,7 +128,9 @@
   }
 }
 
+
 /* The typewriter cursor effect */
+
 @keyframes blink-caret {
   from,
   to {
@@ -99,6 +143,5 @@
 
 @font-face {
   font-family: "Rougher";
-  src: local("Rougher"),
-    url(../fonts/Rougher/RougherPersonalUse-z897X.ttf) format("truetype");
+  src: local("Rougher"), url(../fonts/Rougher/RougherPersonalUse-z897X.ttf) format("truetype");
 }
