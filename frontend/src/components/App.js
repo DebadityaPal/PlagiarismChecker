@@ -18,7 +18,7 @@ class App extends React.Component {
               Check Now
             </div>
             <div className="made_by_container">
-              Made with ❤️ by <strong><a href="https://github.com/DebadityaPal" target="_blank" title="Debaditya Pal" >@DebadityaPal</a></strong> 
+              Made with ❤️ by <strong><a href="https://github.com/DebadityaPal" target="_blank" rel="noreferrer" title="Debaditya Pal" >@DebadityaPal</a></strong> 
             </div>
           </div>
           <div class="home_image_container">
