@@ -256,20 +256,20 @@ class Model:
             str().join([self.charList[c] for c in labelStr]) for labelStr in labelStrs
         ]
 
-    def trainBatch(self, batch):
-        "feed a batch into the NN to train it"
-        numBatchElements = len(batch.imgs)
-        sparse = self.toSparse(batch.gtTexts)
-        evalList = [self.optimizer, self.loss]
-        feedDict = {
-            self.inputImgs: batch.imgs,
-            self.gtTexts: sparse,
-            self.seqLen: [Model.maxTextLen] * numBatchElements,
-            self.is_train: True,
-        }
-        _, lossVal = self.sess.run(evalList, feedDict)
-        self.batchesTrained += 1
-        return lossVal
+    # def trainBatch(self, batch):
+    #     "feed a batch into the NN to train it"
+    #     numBatchElements = len(batch.imgs)
+    #     sparse = self.toSparse(batch.gtTexts)
+    #     evalList = [self.optimizer, self.loss]
+    #     feedDict = {
+    #         self.inputImgs: batch.imgs,
+    #         self.gtTexts: sparse,
+    #         self.seqLen: [Model.maxTextLen] * numBatchElements,
+    #         self.is_train: True,
+    #     }
+    #     _, lossVal = self.sess.run(evalList, feedDict)
+    #     self.batchesTrained += 1
+    #     return lossVal
 
     def dumpNNOutput(self, rnnOutput):
         "dump the output of the NN to CSV file(s)"

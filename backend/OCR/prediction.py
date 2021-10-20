@@ -136,14 +136,14 @@ def predict(imgs):
     return " ".join(result)
 
 
-def inference(filepath):
-    img = cv2.imread(filepath)
-    img = pageDetection(img)
-    words = wordDetection(img)
-    words = sort_words(words)
-    words = bb_to_img(img, words)
-    res = predict(words)
-    return res
+# def inference(filepath):
+#     img = cv2.imread(filepath)
+#     img = pageDetection(img)
+#     words = wordDetection(img)
+#     words = sort_words(words)
+#     words = bb_to_img(img, words)
+#     res = predict(words)
+#     return res
 
 
 def inference_web(imgfile):
