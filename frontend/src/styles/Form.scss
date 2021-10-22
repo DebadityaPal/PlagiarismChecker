@@ -2,7 +2,6 @@
 .Form-card {
   background-color: rgba(174, 174, 255, 0.63);
   border-radius: 10px;
-  min-width: 500px;
   width: 85%;
   margin: 10px 30px;
   padding: 20px 30px;
@@ -40,6 +39,7 @@
 }
 
 .reveal-if-active {
+  border-radius: 20px;
   opacity: 0;
   max-height: 0;
   overflow: hidden;
