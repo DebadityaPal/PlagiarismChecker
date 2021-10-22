@@ -22,7 +22,7 @@ class App extends React.Component {
             </div>
           </div>
           <div class="home_image_container">
-            <img src={Image} alt="" />
+            <img className="homeImg" src={Image} alt="" />
           </div>
         </header>
       </div>
