@@ -56,8 +56,8 @@ class Form extends React.Component {
           <header className="App-header">
             <Toast ref={(el) => this.toast = el} />
             <button type="button" className="btn back-button" onClick={(e) => this.props.history.push("/")}> <img src={LeftArrow} alt="Back" /> </button>
-            <div className="Form-card">
-              <div className="Form-name">PLAGIO</div>
+            <div id="form-card-ref" className="Form-card">
+              <div id="page-heading" className="Form-name">PLAGIO</div>
               <form onSubmit={this.handleSubmit}>
                 <div className="Form-heading">Choose your input</div>
                 <div className="Form-choice">
